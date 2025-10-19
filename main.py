@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, models, transforms
-from torch.utils.data import dataloader
+from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 import numpy as np
 import time 
@@ -36,8 +36,8 @@ image_datasets = {
 }
 
 dataloaders = {
-    "train": dataloader(image_datasets["train"], batch_size=16, shuffle=True),
-    "test": dataloader(image_datasets["test"], batch_size = 16, shffle = False)
+    "train": DataLoader(image_datasets["train"], batch_size=16, shuffle=True),
+    "test": DataLoader(image_datasets["test"], batch_size = 16, shuffle = False)
 }
 
 class_names = image_datasets["train"].classes
@@ -65,7 +65,7 @@ for epoch in range(num_epochs):
     correct = 0
     total = 0
 
-    for inputs, lavels in dataloaders["train"]:
+    for inputs, labels in dataloaders["train"]:
         inputs, labels = inputs.to(device), labels.to(device)
 
         optimizer.zero_grad()
@@ -76,7 +76,7 @@ for epoch in range(num_epochs):
 
         running_loss+=loss.item()*inputs.size(0)
         _, preds = torch.max(outputs, 1)
-        correct += torch.sum(preds == lavels.data)
+        correct += torch.sum(preds == labels.data)
         total+=labels.size(0)
 
     epoch_loss = running_loss/total
@@ -99,4 +99,6 @@ accuracy = 100*correct.double()/total
 print(f"\nAccuracy: {accuracy:.2f}%")
 
 torch.save(model.state_dict(), "alzheimers_model.pth")
-print("Model trained and saved!")
+print("Model has been trained and saved!")
+
+print 
