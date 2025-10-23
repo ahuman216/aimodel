@@ -41,15 +41,16 @@ sampler = WeightedRandomSampler(sample_weights, num_samples=len(sample_weights),
 
 train_loader = DataLoader(train_dataset, batch_size=16, sampler=sampler)
 test_loader = DataLoader(test_dataset, batch_size=16, shuffle = False)
-
+print("Loaders ready!")
 model = models.resnet18(pretrained = False) ##says something about it being deprecated, use 'weights' instead?
 model.fc = nn.Linear(model.fc.in_features, 4)
 model.load_state_dict(torch.load('./models/alzheimers_model.pth'))
+print("model loaded!")
 
 for name, param in model.named_parameters():
     param.requires_grad = True
 
-optimizer = optim.Adam(model.parameters(), lr = 1e-5)
+optimizer = optim.Adam(model.parameters(), lr = 1e-3)
 criterion = nn.CrossEntropyLoss()
 
 num_epochs = 10
@@ -70,4 +71,6 @@ for epoch in range(num_epochs):
     acc = correct/len(train_dataset)
     print(f"Loss: {running_loss/len(train_dataset):.4f}, Acc: {acc:.4f}")
 
-torch.save(model.state_dict(), 'models/alzh_model_v2_finetuned')
+torch.save(model.state_dict(), 'models/alzh_model_v3_finetuned')
+
+##NEED TO ADJUST STUFF< NEW DATASET AND TRAIN AGAIN!

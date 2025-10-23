@@ -100,5 +100,3 @@ print(f"\nAccuracy: {accuracy:.2f}%")
 
 torch.save(model.state_dict(), "alzheimers_model.pth")
 print("Model has been trained and saved!")
-
-print 
