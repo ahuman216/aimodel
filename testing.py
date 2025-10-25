@@ -7,7 +7,6 @@ from torch.utils.data import WeightedRandomSampler
 import numpy as np
 import os
 
-
 data_dir = "./Alzheimer_Dataset"
 train_dir = os.path.join(data_dir, "train")
 test_dir = os.path.join(data_dir, "test")

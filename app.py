@@ -48,3 +48,6 @@ def predict():
     return render_template('result.html',image_path = filepath, prediction = predicted_class)
 if __name__=='__main__':
     app.run(debug=True)
+
+
+
