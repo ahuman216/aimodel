@@ -7,7 +7,7 @@ from torch.utils.data import WeightedRandomSampler
 import numpy as np
 import os
 
-data_dir = "./Alzheimer_Dataset"
+data_dir = "C:/A_temp/Alzheimer_Dataset"
 train_dir = os.path.join(data_dir, "train")
 test_dir = os.path.join(data_dir, "test")
 
@@ -47,7 +47,7 @@ test_dataset = datasets.ImageFolder(test_dir, transform=data_transforms['test'])
 
 model = models.resnet18(pretrained = False) ##says something about it being deprecated, use 'weights' instead?
 model.fc = nn.Linear(model.fc.in_features, 4)
-model.load_state_dict(torch.load('./models/alzh_model_v2_finetuned'))
+model.load_state_dict(torch.load('./models/alzh_model_v3_finetuned.pth'))
 print("model loaded!")
 
 model.eval()

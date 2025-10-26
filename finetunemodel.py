@@ -13,7 +13,7 @@ class EarlyStopping:
         self.counter = 0
         self.best_loss = None
         self.early_stop = False
-    def __call__(self, val_loss):
+    def __call__(self, val_loss, model):
         if self.best_loss is None:
             self.best_loss = val_loss
         elif val_loss>self.best_loss-self.min_delta:
@@ -41,7 +41,7 @@ data_transforms = {
     ])
 
 }
-data_dir = "./Alzheimer_Dataset"
+data_dir = "C:/A_temp/Alzheimer_Dataset"
 train_dir = os.path.join(data_dir, "train")
 test_dir = os.path.join(data_dir, "test")
 
@@ -87,7 +87,6 @@ for epoch in range(num_epochs):
         correct +=torch.sum(preds == labels).item()
         running_loss += loss.item() * inputs.size(0)
     acc = correct/len(train_dataset)
-    
     model.eval()
     val_loss, val_correct =0.0,0
     with torch.no_grad():
@@ -106,8 +105,7 @@ for epoch in range(num_epochs):
     if early_stopper.early_stop:
         print(f"Training stopped earlyl at epoch {epoch+1}")
         break
-
-
+     
 torch.save(model.state_dict(), 'models/alzh_model_v3_finetuned')
 
-##NEED TO ADJUST STUFF< NEW DATASET AND TRAIN AGAIN!
+##NEED TO ADJUST STUFF NEW DATASET AND TRAIN AGAIN  ! 
