@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
-MODEL_PATH = './models/alzh_model_v2_finetuned'
+MODEL_PATH = './models/alzh_model_v2_finetuned.pth'
 NUM_CLASSES = 4
 model = models.resnet18()
 model.fc = nn.Linear(model.fc.in_features, NUM_CLASSES)
