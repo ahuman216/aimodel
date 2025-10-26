@@ -1,0 +1,4 @@
+flask
+torch
+torch.nn
+torchvision
