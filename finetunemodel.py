@@ -107,5 +107,3 @@ for epoch in range(num_epochs):
         break
      
 torch.save(model.state_dict(), 'models/alzh_model_v3_finetuned')
-
-##NEED TO ADJUST STUFF NEW DATASET AND TRAIN AGAIN  ! 
